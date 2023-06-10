@@ -1,11 +1,21 @@
 
 const { generateImage } = require('./controllers/openaiController');
 
-const readline = require('readline');
+const express = require('express');
 
-const r1 = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
-r1.question('What would you like to generate an image of? ', generateImage)
+// app setup
+const app = express();
+
+// middleware
+app.use(express.json());
+
+
+
+// routes
+app.post('/openai/image', generateImage);
+
+
+app.listen(3000, () => {
+    console.log('listening on port 3000');
+    });
