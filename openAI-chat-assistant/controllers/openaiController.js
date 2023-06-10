@@ -1,8 +1,9 @@
 const openai = require('../config/openaiConfig');
 
 
-const generateMeta = async (title) => {
-
+const generateMeta = async (req,res) => {
+    console.log("api hitted for generate meta")
+title = req.body.title;
 
     const description = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
@@ -14,6 +15,6 @@ const generateMeta = async (title) => {
     })
 
 
-    console.log(description.data.choices[0].content);
+res.json(description.data.choices[0].text);
 }
 module.exports = { generateMeta }

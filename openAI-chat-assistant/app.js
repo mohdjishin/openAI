@@ -1,11 +1,17 @@
-const readline = require('readline');
+
 const {generateMeta} = require('./controllers/openaiController');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
 
 
+const express = require('express');
 
-rl.question('Youtube Video Title: \n ', generateMeta)
+app = express();
 
+
+app.use(express.json());
+
+app.get('/openai/generateMeta', generateMeta);
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+}
+);
